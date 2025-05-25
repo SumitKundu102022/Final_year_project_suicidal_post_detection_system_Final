@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 from bdi_tool import calculate_bdi_score
 from prediction_method import display_prediction
-from load_model import load_model_from_dropbox
+from load_model import load_model
 
 
 # Load tokenizer and model
@@ -46,7 +46,7 @@ def main():
     
     # Download and load the model
     # download_model()
-    model = load_model_from_dropbox()
+    model = load_model()
     
     col1, col2 = st.columns([10, 1])
     with col1:

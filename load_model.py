@@ -1,36 +1,75 @@
 import streamlit as st
+import tensorflow as tf
 import os
 from dotenv import load_dotenv
 import dropbox
-import tensorflow as tf
 
 load_dotenv()
 ACCESS_TOKEN = os.getenv("DROPBOX_ACCESS_TOKEN")
-DROPBOX_PATH = "/model.keras"
-LOCAL_MODEL_PATH = "model.keras"
 
-def download_model():
+DROPBOX_PATH = '/model.h5'
+LOCAL_MODEL_PATH = 'model.h5'
+
+def download_model_from_dropbox():
     if not os.path.exists(LOCAL_MODEL_PATH):
         try:
+            dbx = dropbox.Dropbox(ACCESS_TOKEN)
+            metadata, res = dbx.files_download(DROPBOX_PATH)
             with open(LOCAL_MODEL_PATH, 'wb') as f:
-                metadata, res = dropbox.Dropbox(ACCESS_TOKEN).files_download(DROPBOX_PATH)
                 f.write(res.content)
-            st.success("Model downloaded from Dropbox.")
+            # st.success("Model downloaded from Dropbox.")
         except Exception as e:
             st.error(f"Failed to download model: {e}")
             st.stop()
-    else:
-        st.info("Model already exists locally.")
+    # else:
+    #     st.info("Model already exists locally.")
 
-def load_model_from_dropbox():
+def load_model():
     try:
-        download_model()
+        download_model_from_dropbox()
         model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
-        st.success("Model loaded successfully.")
+        # st.success("Model loaded successfully.")
         return model
     except Exception as e:
         st.error(f"Failed to load model: {e}")
         st.stop()
+
+
+
+
+# import streamlit as st
+# import os
+# from dotenv import load_dotenv
+# import dropbox
+# import tensorflow as tf
+
+# load_dotenv()
+# ACCESS_TOKEN = os.getenv("DROPBOX_ACCESS_TOKEN")
+# DROPBOX_PATH = "/model.keras"
+# LOCAL_MODEL_PATH = "model.keras"
+
+# def download_model():
+#     if not os.path.exists(LOCAL_MODEL_PATH):
+#         try:
+#             with open(LOCAL_MODEL_PATH, 'wb') as f:
+#                 metadata, res = dropbox.Dropbox(ACCESS_TOKEN).files_download(DROPBOX_PATH)
+#                 f.write(res.content)
+#             st.success("Model downloaded from Dropbox.")
+#         except Exception as e:
+#             st.error(f"Failed to download model: {e}")
+#             st.stop()
+#     else:
+#         st.info("Model already exists locally.")
+
+# def load_model_from_dropbox():
+#     try:
+#         download_model()
+#         model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
+#         st.success("Model loaded successfully.")
+#         return model
+#     except Exception as e:
+#         st.error(f"Failed to load model: {e}")
+#         st.stop()
 
 
 
