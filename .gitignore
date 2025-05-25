@@ -28,3 +28,4 @@ glove.840B.300d.pkl
 # Tokenizers / Model Files (if large or sensitive)
 # tokenizer.pkl
 model.h5
+test.py
