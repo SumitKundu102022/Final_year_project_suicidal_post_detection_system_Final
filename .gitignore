@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+# *.pkl
+.env
+*.h5
+*.toml
+*.keras
+*.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual Environment
+venv/
+
+
+# System
+.DS_Store
+*.swp
+
+# VS Code/IDE
+.vscode/
+*.idea/
+Covert.py
+glove.840B.300d.pkl
+
+# Tokenizers / Model Files (if large or sensitive)
+# tokenizer.pkl
+model.h5
