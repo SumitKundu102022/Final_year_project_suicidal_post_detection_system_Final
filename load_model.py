@@ -7,7 +7,7 @@ import requests
 load_dotenv()
 
 DROPBOX_DIRECT_URL = os.getenv("DROPBOX_DIRECT_URL")  # Replace with your direct link
-LOCAL_MODEL_PATH = "model.h5"
+LOCAL_MODEL_PATH = "model.keras"
 
 def download_model_from_dropbox():
     if not os.path.exists(LOCAL_MODEL_PATH):
