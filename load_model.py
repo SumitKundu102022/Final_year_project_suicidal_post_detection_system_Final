@@ -23,6 +23,7 @@ def download_model_from_dropbox():
             st.stop()
     else:
         # st.info("Model already exists locally.")
+        pass
 
 @st.cache_resource
 def load_model():
