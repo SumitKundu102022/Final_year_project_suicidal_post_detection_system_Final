@@ -12,24 +12,24 @@ LOCAL_MODEL_PATH = "model/model.keras"
 def download_model_from_dropbox():
     if not os.path.exists(LOCAL_MODEL_PATH):
         try:
-            st.info("Downloading model...")
+            # st.info("Downloading model...")
             response = requests.get(DROPBOX_DIRECT_URL)
             response.raise_for_status()
             with open(LOCAL_MODEL_PATH, "wb") as f:
                 f.write(response.content)
-            st.success("Model downloaded successfully.")
+            # st.success("Model downloaded successfully.")
         except Exception as e:
             st.error(f"Failed to download model: {e}")
             st.stop()
     else:
-        st.info("Model already exists locally.")
+        # st.info("Model already exists locally.")
 
 @st.cache_resource
 def load_model():
     try:
         download_model_from_dropbox()
         model = tf.keras.models.load_model(LOCAL_MODEL_PATH)
-        st.success("Model loaded successfully.")
+        # st.success("Model loaded successfully.")
         return model
     except Exception as e:
         st.error(f"Failed to load model: {e}")
